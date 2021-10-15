@@ -25,6 +25,7 @@ export default {
     ...mapGetters({
       GET_MODAL_DATA: 'GET_MODAL_DATA',
       GET_CURRENT_DATA_SET: 'GET_CURRENT_DATA_SET',
+      GET_CHOSEN_LEVEL: 'GET_CHOSEN_LEVEL',
       GET_CHOSEN_FOLDER_ID: 'GET_CHOSEN_FOLDER_ID'
     })
   },

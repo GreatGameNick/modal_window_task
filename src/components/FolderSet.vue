@@ -33,23 +33,26 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      GET_CHOSEN_FOLDER_ID: 'GET_CHOSEN_FOLDER_ID',
+      GET_CHOSEN_LEVEL: 'GET_CHOSEN_LEVEL',
       GET_FOLDER_SET: 'GET_FOLDER_SET'
     })
   },
   methods: {
     ...mapMutations({
+      SET_CHOSEN_LEVEL: 'SET_CHOSEN_LEVEL',
       SET_CHOSEN_FOLDER_ID: 'SET_CHOSEN_FOLDER_ID'
     }),
     isFolderTurnOut(id) {
-      return this.GET_CHOSEN_FOLDER_ID.startsWith(id)
+      return this.GET_CHOSEN_LEVEL.startsWith(id)
     },
     onTurnOutFolder(id) {
-      if (this.GET_CHOSEN_FOLDER_ID.includes(id)) {    // переходим на 1 шаг назад от кликнутой папки
+      if (this.GET_CHOSEN_LEVEL.includes(id)) {    // переходим на 1 шаг назад от кликнутой папки
         let [aa, ...reversedPrevisionSet] = id.split('/').reverse()
         let previsionId = reversedPrevisionSet.reverse().join('/')
-        this.SET_CHOSEN_FOLDER_ID(previsionId)
+        this.SET_CHOSEN_LEVEL(previsionId)
+        this.SET_CHOSEN_FOLDER_ID(id)
       } else {
+        this.SET_CHOSEN_LEVEL(id)
         this.SET_CHOSEN_FOLDER_ID(id)
       }
     }

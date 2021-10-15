@@ -10,6 +10,7 @@ export default new Vuex.Store({
       title: '',
       dataId: null
     },
+    chosenLevel: '',
     chosenFolderId: '',
     modalDatas: [         //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
       {
@@ -165,11 +166,15 @@ export default new Vuex.Store({
       }
       return currentFolderSet
     },
+    GET_CHOSEN_LEVEL: state => state.chosenLevel,
     GET_CHOSEN_FOLDER_ID: state => state.chosenFolderId
   },
   mutations: {
     SET_MODAL_COMPONENT_DATA(state, data) {
       state.modalData = data
+    },
+    SET_CHOSEN_LEVEL(state, id) {
+      state.chosenLevel = id
     },
     SET_CHOSEN_FOLDER_ID(state, id) {
       state.chosenFolderId = id
