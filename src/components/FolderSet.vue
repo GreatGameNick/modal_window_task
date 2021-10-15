@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: 'FolderSet',
@@ -38,12 +38,20 @@ export default {
     })
   },
   methods: {
+    ...mapMutations({
+      SET_CHOSEN_LEVEL: 'SET_CHOSEN_LEVEL'
+    }),
     isFolderTurnOut(id) {
-      return this.GET_CHOSEN_FOLDER_ID.includes(id)
+      return this.GET_CHOSEN_FOLDER_ID.startsWith(id)
     },
     onTurnOutFolder(id) {
-      if (this.chosenFolders.includes(id))
-        this.chosenFolders = this.chosenFolders.push(id)
+      if (this.GET_CHOSEN_FOLDER_ID.includes(id)) {    // переходим на 1 шаг назад от кликнутой папки
+        let [aa, ...reversedPrevisionSet] = id.split('/').reverse()
+        let previsionId = reversedPrevisionSet.reverse().join('/')
+        this.SET_CHOSEN_LEVEL(previsionId)
+      } else {
+        this.SET_CHOSEN_LEVEL(id)
+      }
     }
   }
 }

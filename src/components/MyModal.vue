@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div>
-      {{GET_MODAL_DATA.title}}
-    </div>
-
     <component :is="GET_MODAL_DATA.name"/>
 
     <button @click="onShutModal">SHUT MODAL WINDOW</button>
@@ -25,10 +21,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA'
+      SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA',
+      SET_CHOSEN_LEVEL: 'SET_CHOSEN_LEVEL'
     }),
     onShutModal() {
       this.SET_MODAL_COMPONENT_DATA({name: '', title: '', dataId: null})
+      this.SET_CHOSEN_LEVEL('')
     }
   }
 }

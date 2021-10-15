@@ -10,7 +10,7 @@ export default new Vuex.Store({
       title: '',
       dataId: null
     },
-    chosenFolderId: '1/1',
+    chosenFolderId: '',
     modalDatas: [         //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
       {
         dataId: 25,
@@ -23,16 +23,62 @@ export default new Vuex.Store({
                 folders: [
                   {
                     id: '1/1/1',
-                    folders: []
+                    folders: [
+                      {
+                        id: '1/1/1/1',
+                        folders: []
+                      },
+                      {
+                        id: '1/1/1/2',
+                        folders: []
+                      },
+                    ]
                   },
                   {
                     id: '1/1/2',
-                    folders: []
-                  },]
+                    folders: [
+                      {
+                        id: '1/1/2/1',
+                        folders: []
+                      },
+                      {
+                        id: '1/1/2/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                ]
               },
               {
                 id: '1/2',
-                folders: []
+                folders: [
+                  {
+                    id: '1/2/1',
+                    folders: [
+                      {
+                        id: '1/2/1/1',
+                        folders: []
+                      },
+                      {
+                        id: '1/2/1/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                  {
+                    id: '1/2/2',
+                    folders: [
+                      {
+                        id: '1/2/2/1',
+                        folders: []
+                      },
+                      {
+                        id: '1/2/2/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                ]
               },
             ]
           },
@@ -41,11 +87,65 @@ export default new Vuex.Store({
             folders: [
               {
                 id: '2/1',
-                folders: []
+                folders: [
+                  {
+                    id: '2/1/1',
+                    folders: [
+                      {
+                        id: '2/1/1/1',
+                        folders: []
+                      },
+                      {
+                        id: '2/1/1/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                  {
+                    id: '2/1/2',
+                    folders: [
+                      {
+                        id: '2/1/2/1',
+                        folders: []
+                      },
+                      {
+                        id: '2/1/2/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                ]
               },
               {
                 id: '2/2',
-                folders: []
+                folders: [
+                  {
+                    id: '2/2/1',
+                    folders: [
+                      {
+                        id: '2/2/1/1',
+                        folders: []
+                      },
+                      {
+                        id: '2/2/1/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                  {
+                    id: '2/2/2',
+                    folders: [
+                      {
+                        id: '2/2/2/1',
+                        folders: []
+                      },
+                      {
+                        id: '2/2/2/2',
+                        folders: []
+                      },
+                    ]
+                  },
+                ]
               },
             ]
           },
@@ -71,7 +171,9 @@ export default new Vuex.Store({
     SET_MODAL_COMPONENT_DATA(state, data) {
       state.modalData = data
     },
-
+    SET_CHOSEN_LEVEL(state, id) {
+      state.chosenFolderId = id
+    }
   },
   actions: {},
   modules: {}
