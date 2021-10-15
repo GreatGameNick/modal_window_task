@@ -10,7 +10,7 @@ export default new Vuex.Store({
       title: '',
       dataId: null
     },
-    chosenFolderId: '',
+    chosenFolderId: '1/1',
     modalDatas: [         //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
       {
         dataId: 25,
@@ -26,7 +26,7 @@ export default new Vuex.Store({
                     folders: []
                   },
                   {
-                    id: '1/2/2',
+                    id: '1/1/2',
                     folders: []
                   },]
               },
@@ -61,11 +61,11 @@ export default new Vuex.Store({
       let currentFolderSet = getters.GET_CURRENT_DATA_SET
 
       for(let chunk of folderChunks) {
-        currentFolderSet = currentFolderSet.find(folder => folder.id.split('/').pop() === chunk)
+        currentFolderSet = currentFolderSet.find(folder => folder.id.split('/').pop() === chunk).folders
       }
-
       return currentFolderSet
-    }
+    },
+    GET_CHOSEN_FOLDER_ID: state => state.chosenFolderId
   },
   mutations: {
     SET_MODAL_COMPONENT_DATA(state, data) {

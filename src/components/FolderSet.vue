@@ -1,29 +1,29 @@
 <template>
   <div>
-    <div v-for="item of folderSet" :key="item.id">
-      <div>{{ item.id }}</div>
+    <div v-for="folder of folders" :key="folder.id">
+      <div>
+        <div @click="onTurnOutFolder(folder.id)">{{ folder.id }}</div>
 
-<!--      <FolderSet :folderSet="GET_FOLDER_SET"-->
-<!--                 :key="`FolderSet_${item.id}`"-->
-<!--                 @click="turnOut(item.id)"-->
-<!--                 v-if="chosenFolders.includes(item.id) "-->
-<!--      />-->
+        <FolderSet :folders="GET_FOLDER_SET(folder.id)"
+                   :key="`FolderSet_${folder.id}`"
+                   v-if="isFolderTurnOut(folder.id)"
+        />
 
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import FolderSet from '@/components/FolderSet'
 import {mapGetters} from "vuex";
 
 export default {
-  name: (() => "FolderSet_" + Math.floor(Math.random() * 1000000))(),
+  name: 'FolderSet',
   components: {
-    FolderSet
+    FolderSet: () => import('@/components/FolderSet')
   },
   props: {
-    folderSet: {
+    folders: {
       type: Array,
       required: true
     }
@@ -33,11 +33,15 @@ export default {
   }),
   computed: {
     ...mapGetters({
+      GET_CHOSEN_FOLDER_ID: 'GET_CHOSEN_FOLDER_ID',
       GET_FOLDER_SET: 'GET_FOLDER_SET'
     })
   },
   methods: {
-    turnOut(id) {
+    isFolderTurnOut(id) {
+      return this.GET_CHOSEN_FOLDER_ID.includes(id)
+    },
+    onTurnOutFolder(id) {
       if (this.chosenFolders.includes(id))
         this.chosenFolders = this.chosenFolders.push(id)
     }
