@@ -1,27 +1,35 @@
 <template>
   <div>
-    modal-close-btn
+    <div>
+      {{GET_MODAL_DATA.title}}
+    </div>
 
-    <component :is="GET_MODAL_COMPONENT_NAME"
-               :componentData="GET_MODAL_COMPONENT_DATA"
-    />
+    <component :is="GET_MODAL_DATA.name"/>
 
+    <button @click="onShutModal">SHUT MODAL WINDOW</button>
   </div>
 </template>
 
 <script>
-import FolderBranch from '@/components/FolderSet'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 
 export default {
   name: "MyModal_1",
   components: {
-    FolderBranch
+    FolderThreeModalComponent: () => import('@/components/FolderThreeModalComponent')
   },
   computed: {
     ...mapGetters({
-      GET_FOLDER_SET: 'GET_FOLDER_SET'
+      GET_MODAL_DATA: 'GET_MODAL_DATA'
     })
+  },
+  methods: {
+    ...mapMutations({
+      SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA'
+    }),
+    onShutModal() {
+      this.SET_MODAL_COMPONENT_DATA({name: '', title: '', dataId: null})
+    }
   }
 }
 </script>

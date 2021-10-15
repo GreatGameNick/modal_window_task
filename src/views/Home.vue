@@ -2,8 +2,9 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
 
-    <MyModal/>
-    <button @click="onOpenModal">OPEN_MODAL_WINDOW</button>
+    <MyModal v-if="!!GET_MODAL_DATA.name"/>
+    <hr>
+    <button @click="onOpenModal">OPEN MODAL WINDOW</button>
 
   </div>
 </template>
@@ -19,17 +20,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      GET_FOLDER_SET: 'GET_FOLDER_SET'
+      GET_MODAL_DATA: 'GET_MODAL_DATA'
     })
   },
   methods: {
     ...mapMutations({
-      SET_MODAL_COMPONENT_NAME: 'SET_MODAL_COMPONENT_NAME',
       SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA'
     }),
     onOpenModal() {
-      this.SET_MODAL_COMPONENT_NAME('FolderThreeModalComponent')
-      this.SET_MODAL_COMPONENT_DATA(this.GET_FOLDER_SET('0'))
+      this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
     }
   }
 }

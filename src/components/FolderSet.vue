@@ -1,11 +1,15 @@
 <template>
-  <div v-for="(item, ind) of setData" :key="setData">
-    <div>{{ item.id }}</div>
-    <FolderSet :folderSet="GET_FOLDER_SET"
-                  @click="turnOut(item.id)"
-                  v-if="chosenFolders.includes(item.id) "
-    />
+  <div>
+    <div v-for="item of folderSet" :key="item.id">
+      <div>{{ item.id }}</div>
 
+<!--      <FolderSet :folderSet="GET_FOLDER_SET"-->
+<!--                 :key="`FolderSet_${item.id}`"-->
+<!--                 @click="turnOut(item.id)"-->
+<!--                 v-if="chosenFolders.includes(item.id) "-->
+<!--      />-->
+
+    </div>
   </div>
 </template>
 
@@ -14,8 +18,15 @@ import FolderSet from '@/components/FolderSet'
 import {mapGetters} from "vuex";
 
 export default {
+  name: (() => "FolderSet_" + Math.floor(Math.random() * 1000000))(),
   components: {
     FolderSet
+  },
+  props: {
+    folderSet: {
+      type: Array,
+      required: true
+    }
   },
   data: () => ({
     chosenFolders: [],
@@ -31,7 +42,6 @@ export default {
         this.chosenFolders = this.chosenFolders.push(id)
     }
   }
-
 }
 </script>
 
