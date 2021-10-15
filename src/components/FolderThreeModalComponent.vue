@@ -1,12 +1,12 @@
 <template>
-  <div>
-    MyModal_1
-  </div>
+<div>
+  FolderThreeModalComponent
+</div>
 </template>
 
 <script>
 export default {
-  name: "MyModal_1"
+  name: "FolderThreeModalComponent"
 }
 </script>
 
