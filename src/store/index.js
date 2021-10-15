@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios";
 
 Vue.use(Vuex)
 
@@ -38,8 +39,20 @@ export default new Vuex.Store({
     },
     SET_CHOSEN_FOLDER_ID(state, id) {
       state.chosenFolderId = id
+    },
+    SET_EXTERNAL_DATA(state, data) {
+      state.modalDatas = data
     }
   },
-  actions: {},
+  actions: {
+    async FETCH_EXTERNAL_DATA({commit}) {
+      await axios.get(window.location.href + 'externalData.json')
+        .then(({data}) => {
+          console.log('data ===', data)
+          commit('SET_EXTERNAL_DATA', data.sets)
+        })
+        .catch(error => console.log)
+    }
+  },
   modules: {}
 })

@@ -11,7 +11,7 @@
 
 <script>
 import MyModal from '@/components/MyModal'
-import {mapGetters, mapMutations} from "vuex"
+import {mapGetters, mapMutations, mapActions} from "vuex"
 
 export default {
   name: 'Home',
@@ -27,19 +27,19 @@ export default {
     ...mapMutations({
       SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA'
     }),
+    ...mapActions({
+      FETCH_EXTERNAL_DATA: 'FETCH_EXTERNAL_DATA'
+    }),
     onOpenModal() {
       this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
     }
   },
-  created() {
-    console.log('=window.location=', window.location)
+  async created() {
+    await this.FETCH_EXTERNAL_DATA()
   }
 }
 </script>
 
 <style scoped lang="scss">
-.my {
-  color: $liteGreen;
-}
 
 </style>
