@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      SET_CHOSEN_LEVEL: 'SET_CHOSEN_LEVEL'
+      SET_CHOSEN_FOLDER_ID: 'SET_CHOSEN_FOLDER_ID'
     }),
     isFolderTurnOut(id) {
       return this.GET_CHOSEN_FOLDER_ID.startsWith(id)
@@ -48,9 +48,9 @@ export default {
       if (this.GET_CHOSEN_FOLDER_ID.includes(id)) {    // переходим на 1 шаг назад от кликнутой папки
         let [aa, ...reversedPrevisionSet] = id.split('/').reverse()
         let previsionId = reversedPrevisionSet.reverse().join('/')
-        this.SET_CHOSEN_LEVEL(previsionId)
+        this.SET_CHOSEN_FOLDER_ID(previsionId)
       } else {
-        this.SET_CHOSEN_LEVEL(id)
+        this.SET_CHOSEN_FOLDER_ID(id)
       }
     }
   }

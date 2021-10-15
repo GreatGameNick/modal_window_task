@@ -171,7 +171,7 @@ export default new Vuex.Store({
     SET_MODAL_COMPONENT_DATA(state, data) {
       state.modalData = data
     },
-    SET_CHOSEN_LEVEL(state, id) {
+    SET_CHOSEN_FOLDER_ID(state, id) {
       state.chosenFolderId = id
     }
   },
