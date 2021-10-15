@@ -1,0 +1,11 @@
+@import 'constants';
+@import "dounCSS";
+@import "utils";
+@import "fonts";
+
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
