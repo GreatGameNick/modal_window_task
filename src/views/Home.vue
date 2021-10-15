@@ -30,6 +30,9 @@ export default {
     onOpenModal() {
       this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
     }
+  },
+  created() {
+    console.log('=window.location=', window.location)
   }
 }
 </script>
