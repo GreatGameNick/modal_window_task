@@ -19,7 +19,7 @@
       <footer>
         <div v-show="!!GET_CHOSEN_FOLDER_ID" class="modal-footer__choice">
           your current choice -
-          <span :class="{'no-choice': GET_CHOSEN_FOLDER_ID === 'NO chosen eny folder'}">
+          <span :class="{'no-choice': GET_CHOSEN_FOLDER_ID === 'no chosen eny folder'}">
             {{GET_CHOSEN_FOLDER_ID}}
           </span>
         </div>
@@ -34,7 +34,7 @@
 import {mapGetters, mapMutations} from 'vuex'
 
 export default {
-  name: "MyModal_1",
+  name: "MyModal",
   components: {
     FolderThreeModalComponent: () => import('@/components/FolderThreeModalComponent')
   },
@@ -60,11 +60,11 @@ export default {
       }
     },
     onSend () {
-      if(this.GET_CHOSEN_FOLDER_ID) {
+      if(this.GET_CHOSEN_FOLDER_ID && this.GET_CHOSEN_FOLDER_ID !== 'no chosen eny folder') {
         this.SET_MODAL_RESULT()
         this.onShutModal()
       } else {
-        this.SET_CHOSEN_FOLDER_ID('NO chosen eny folder')
+        this.SET_CHOSEN_FOLDER_ID('no chosen eny folder')
       }
 
     }
@@ -135,19 +135,34 @@ export default {
     }
 
     footer {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       box-sizing: border-box;
       padding: rem(20) 0;
 
-      button {
-        margin-left: rem(20);
+      @media (max-width: $iPade) {
+        flex-flow: column;
+        justify-content: center;
       }
 
       .modal-footer__choice {
         margin-right: auto;
+
+        @media (max-width: $iPade) {
+          margin: rem(20) 0 0;
+        }
       }
+
+      button {
+        margin-left: rem(20);
+
+        @media (max-width: $iPade) {
+          margin: rem(20) 0 0;
+        }
+      }
+
     }
   }
 }

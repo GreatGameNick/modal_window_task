@@ -3,6 +3,7 @@
     <div v-for="folder of folders" :key="folder.id">
       <div>
         <div @click="onTurnOutFolder(folder.id)"
+             class="level"
              :class="{chosen: folder.id === GET_CHOSEN_FOLDER_ID}"
              :style="{paddingLeft: calculatePadding(folder.id)}"
         >
@@ -69,7 +70,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.level {
+  cursor: pointer;
+
+  &:hover {
+    background: $greyTooLight;
+  }
+}
+
 .chosen {
-  background: $chosen;
+  background: $chosen !important;
 }
 </style>
