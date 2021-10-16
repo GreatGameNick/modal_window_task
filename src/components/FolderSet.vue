@@ -4,6 +4,7 @@
       <div>
         <div @click="onTurnOutFolder(folder.id)"
              :class="{chosen: folder.id === GET_CHOSEN_FOLDER_ID}"
+             :style="{paddingLeft: calculatePadding(folder.id)}"
         >
           {{ folder.id }}
         </div>
@@ -12,7 +13,6 @@
                    :key="`FolderSet_${folder.id}`"
                    v-if="isFolderTurnOut(folder.id)"
         />
-
       </div>
     </div>
   </div>
@@ -60,6 +60,9 @@ export default {
         this.SET_CHOSEN_LEVEL(id)
         this.SET_CHOSEN_FOLDER_ID(id)
       }
+    },
+    calculatePadding(id = []) {
+      return 10 * id.split('/').length + 'px'
     }
   }
 }
