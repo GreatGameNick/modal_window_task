@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="folder-wrapper">
     <div>
       {{GET_MODAL_DATA.title}}
     </div>
@@ -32,6 +32,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.folder-wrapper {
+  border: red 1px solid;
+}
 </style>

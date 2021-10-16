@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrapper">
     <header>
-      <img alt="Vue logo" src="@/assets/logo.png">
+      <img src="@/assets/logo.png">
       <nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
@@ -9,8 +9,42 @@
     </header>
 
     <router-view/>
+
+    <MyModal v-if="!!GET_MODAL_DATA.name"/>
   </div>
 </template>
+
+<script>
+import MyModal from '@/components/MyModal'
+import {mapActions, mapGetters, mapMutations} from "vuex"
+
+export default {
+  components: {
+    MyModal
+  },
+  computed: {
+    ...mapGetters({
+      GET_MODAL_DATA: 'GET_MODAL_DATA'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA'
+    }),
+    ...mapActions({
+      FETCH_EXTERNAL_DATA: 'FETCH_EXTERNAL_DATA'
+    }),
+    onOpenModal() {
+      this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
+    }
+  },
+  async created() {
+    await this.FETCH_EXTERNAL_DATA()
+  }
+}
+
+
+</script>
 
 <style lang="scss">
 @import "assets/SCSS/main";

@@ -7,6 +7,14 @@ body {
   @extend %font__12-600-grey;
 }
 
+button {
+  display: block;
+  width: 100%;
+  max-width: rem(300);
+  padding: rem(10) rem(20);
+  cursor: pointer;
+}
+
 
 %flex-center {
   display: flex;

@@ -7,22 +7,16 @@
 
     <button @click="onOpenModal">OPEN MODAL WINDOW</button>
 
-    <MyModal v-if="!!GET_MODAL_DATA.name"/>
   </div>
 </template>
 
 <script>
-import MyModal from '@/components/MyModal'
-import {mapGetters, mapMutations, mapActions} from "vuex"
+import {mapGetters, mapMutations} from "vuex"
 
 export default {
   name: 'Home',
-  components: {
-    MyModal
-  },
   computed: {
     ...mapGetters({
-      GET_MODAL_DATA: 'GET_MODAL_DATA',
       GET_USER_NAME: 'GET_USER_NAME'
     }),
     userName: {
@@ -39,21 +33,16 @@ export default {
       SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA',
       SET_USER_NAME: 'SET_USER_NAME'
     }),
-    ...mapActions({
-      FETCH_EXTERNAL_DATA: 'FETCH_EXTERNAL_DATA'
-    }),
     onOpenModal() {
       this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
     }
-  },
-  async created() {
-    await this.FETCH_EXTERNAL_DATA()
   }
 }
 </script>
 
 <style scoped lang="scss">
 .home-wrapper {
+  position: relative;
   width: 100%;
   height: fit-content;
 
@@ -69,12 +58,7 @@ export default {
   }
 
   button {
-    display: block;
-    width: 100%;
-    max-width: rem(300);
     margin: rem(60) auto  rem(100);
-    padding: rem(10) rem(20);
-    cursor: pointer;
   }
 }
 </style>
