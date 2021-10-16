@@ -1,15 +1,14 @@
 <template>
   <div class="folder-wrapper">
-    <div>
+    <header class="folder-header">
       {{GET_MODAL_DATA.title}}
-    </div>
-    <div>
-      your chosen folder => {{GET_CHOSEN_FOLDER_ID}}
-    </div>
+    </header>
+    <main>
+      <FolderSet :key="GET_MODAL_DATA.dataId"
+                 :folders="GET_CURRENT_DATA_SET"
+      />
+    </main>
 
-    <FolderSet :key="GET_MODAL_DATA.dataId"
-               :folders="GET_CURRENT_DATA_SET"
-    />
   </div>
 </template>
 
@@ -34,6 +33,21 @@ export default {
 
 <style scoped lang="scss">
 .folder-wrapper {
-  border: red 1px solid;
+  border: $green 1px solid;
+
+  header {
+    height: rem(40);
+    @extend %flex-center;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  main {
+    margin: rem(20);
+    box-sizing: border-box;
+    padding: 0 rem(10);
+    border-left: $grey 1px solid;
+  }
+
 }
 </style>
