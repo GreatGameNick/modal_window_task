@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div class="main-wrapper">
+    <header>
+      <img alt="Vue logo" src="@/assets/logo.png">
+      <nav>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </nav>
+    </header>
+
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "assets/SCSS/main";
 
-#nav {
-  padding: 30px;
+.main-wrapper {
+  width: 100%;
+  max-width: $desktopWidth;
+  margin: rem(30) auto;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  header {
+    display: flex;
+    box-sizing: border-box;
+    padding: rem(20);
 
-    &.router-link-exact-active {
-      color: #42b983;
+    nav {
+      margin: rem(10) rem(40);
     }
   }
+
+  border: $grey 1px solid;
 }
+
 </style>

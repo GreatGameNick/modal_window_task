@@ -5,7 +5,17 @@ $generalFontSize_number: 16;
   font-family: Open Sans;
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
+  font-size: rem(16);
   line-height: 112.69%;
-  color: $greyMiddle;
+  color: $greyDark;
+}
+
+
+a {
+  color: $greyDark;
+  font-weight: bold;
+
+  &.router-link-exact-active {
+    color: $green;
+  }
 }

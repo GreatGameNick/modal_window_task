@@ -13,7 +13,8 @@ export default new Vuex.Store({
     },
     chosenLevel: '',
     chosenFolderId: '',        //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
-    modalDatas: []
+    modalDatas: [],
+    userName: ''
   },
   getters: {
     GET_MODAL_DATA: state => state.modalData,
@@ -28,7 +29,8 @@ export default new Vuex.Store({
       return currentFolderSet
     },
     GET_CHOSEN_LEVEL: state => state.chosenLevel,
-    GET_CHOSEN_FOLDER_ID: state => state.chosenFolderId
+    GET_CHOSEN_FOLDER_ID: state => state.chosenFolderId,
+    GET_USER_NAME: state => state.userName
   },
   mutations: {
     SET_MODAL_COMPONENT_DATA(state, data) {
@@ -42,7 +44,10 @@ export default new Vuex.Store({
     },
     SET_EXTERNAL_DATA(state, data) {
       state.modalDatas = data
-    }
+    },
+    SET_USER_NAME(state, name) {
+      state.userName = name
+    },
   },
   actions: {
     async FETCH_EXTERNAL_DATA({commit}) {

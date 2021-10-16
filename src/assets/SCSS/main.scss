@@ -3,6 +3,10 @@
 @import "utils";
 @import "fonts";
 
+body {
+  @extend %font__12-600-grey;
+}
+
 
 %flex-center {
   display: flex;
