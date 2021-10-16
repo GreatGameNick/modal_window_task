@@ -8,7 +8,6 @@
                  :folders="GET_CURRENT_DATA_SET"
       />
     </main>
-
   </div>
 </template>
 
@@ -48,6 +47,5 @@ export default {
     padding: 0 rem(10);
     border-left: $grey 1px solid;
   }
-
 }
 </style>

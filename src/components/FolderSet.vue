@@ -2,7 +2,11 @@
   <div>
     <div v-for="folder of folders" :key="folder.id">
       <div>
-        <div @click="onTurnOutFolder(folder.id)">{{ folder.id }}</div>
+        <div @click="onTurnOutFolder(folder.id)"
+             :class="{chosen: folder.id === GET_CHOSEN_FOLDER_ID}"
+        >
+          {{ folder.id }}
+        </div>
 
         <FolderSet :folders="GET_FOLDER_SET(folder.id)"
                    :key="`FolderSet_${folder.id}`"
@@ -33,6 +37,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
+      GET_CHOSEN_FOLDER_ID: 'GET_CHOSEN_FOLDER_ID',
       GET_CHOSEN_LEVEL: 'GET_CHOSEN_LEVEL',
       GET_FOLDER_SET: 'GET_FOLDER_SET'
     })
@@ -60,6 +65,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.chosen {
+  background: $chosen;
+}
 </style>
