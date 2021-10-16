@@ -6,15 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userName: '',
     modalData: {
       name: '',
       title: '',
       dataId: null
     },
     chosenLevel: '',
-    chosenFolderId: '',        //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
-    modalDatas: [],
-    userName: ''
+    chosenFolderId: '',
+    modalResult: '',
+    modalDatas: [],           //внешняя база данных. Содержит базЫ, востребованные для различных модальных окон.
   },
   getters: {
     GET_MODAL_DATA: state => state.modalData,
@@ -30,7 +31,8 @@ export default new Vuex.Store({
     },
     GET_CHOSEN_LEVEL: state => state.chosenLevel,
     GET_CHOSEN_FOLDER_ID: state => state.chosenFolderId,
-    GET_USER_NAME: state => state.userName
+    GET_USER_NAME: state => state.userName,
+    GET_SUBMIT: state => state.modalResult
   },
   mutations: {
     SET_MODAL_COMPONENT_DATA(state, data) {
@@ -48,14 +50,18 @@ export default new Vuex.Store({
     SET_USER_NAME(state, name) {
       state.userName = name
     },
+    SET_MODAL_RESULT: state => state.modalResult = state.chosenFolderId,
+    RESET_CHOICE: state => {
+      state.chosenFolderId = ''
+      state.modalResult = ''
+      state.chosenLevel = ''
+    }
+
   },
   actions: {
     async FETCH_EXTERNAL_DATA({commit}) {
       await axios.get(window.location.href + 'externalData.json')
-        .then(({data}) => {
-          console.log('data ===', data)
-          commit('SET_EXTERNAL_DATA', data.sets)
-        })
+        .then(({data}) => commit('SET_EXTERNAL_DATA', data.sets))
         .catch(error => console.log)
     }
   },

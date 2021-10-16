@@ -3,18 +3,29 @@
     <div @click="onShutModal" class="modal-outside"></div>
 
     <div class="modal-place">
-      <div class="modal-place__title">
-        welcome {{GET_USER_NAME}}
-      </div>
+      <header>
+        <div class="modal-header__title">
+          welcome {{GET_USER_NAME}}
+        </div>
+        <div @click="onShutModal" class="modal-place__control">
+          &times;
+        </div>
+      </header>
 
       <component :is="GET_MODAL_DATA.name"
                  class="modal-place__component"
       />
 
-      <section>
-
+      <footer>
+        <div v-show="!!GET_CHOSEN_FOLDER_ID" class="modal-footer__choice">
+          your current choice -
+          <span :class="{'no-choice': GET_CHOSEN_FOLDER_ID === 'NO chosen eny folder'}">
+            {{GET_CHOSEN_FOLDER_ID}}
+          </span>
+        </div>
         <button @click="onShutModal">SHUT MODAL WINDOW</button>
-      </section>
+        <button @click="onSend">OK</button>
+      </footer>
     </div>
   </div>
 </template>
@@ -30,20 +41,39 @@ export default {
   computed: {
     ...mapGetters({
       GET_MODAL_DATA: 'GET_MODAL_DATA',
-      GET_USER_NAME: 'GET_USER_NAME'
+      GET_USER_NAME: 'GET_USER_NAME',
+      GET_CHOSEN_FOLDER_ID: 'GET_CHOSEN_FOLDER_ID'
     })
   },
   methods: {
     ...mapMutations({
       SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA',
       SET_CHOSEN_LEVEL: 'SET_CHOSEN_LEVEL',
-      SET_CHOSEN_FOLDER_ID: 'SET_CHOSEN_FOLDER_ID'
+      SET_CHOSEN_FOLDER_ID: 'SET_CHOSEN_FOLDER_ID',
+      SET_MODAL_RESULT: 'SET_MODAL_RESULT'
     }),
-    onShutModal() {
-      this.SET_MODAL_COMPONENT_DATA({name: '', title: '', dataId: null})
-      this.SET_CHOSEN_LEVEL('')
-      this.SET_CHOSEN_FOLDER_ID('')
+    onShutModal(event) {
+      if(event == null || event.type === "click" || event.key === 'Escape') {
+        this.SET_MODAL_COMPONENT_DATA({name: '', title: '', dataId: null})
+        this.SET_CHOSEN_LEVEL('')
+        this.SET_CHOSEN_FOLDER_ID('')
+      }
+    },
+    onSend () {
+      if(this.GET_CHOSEN_FOLDER_ID) {
+        this.SET_MODAL_RESULT()
+        this.onShutModal()
+      } else {
+        this.SET_CHOSEN_FOLDER_ID('NO chosen eny folder')
+      }
+
     }
+  },
+  created() {
+    document.addEventListener('keyup', this.onShutModal)
+  },
+  beforeDestroy() {
+    document.removeEventListener('keyup', this.onShutModal)
   }
 }
 </script>
@@ -69,7 +99,6 @@ export default {
     opacity: 0.8;
   }
 
-
   .modal-place {
     z-index: 20;
     width: 100%;
@@ -80,11 +109,50 @@ export default {
     box-sizing: border-box;
     padding: rem(20);
 
-    section {
-      border: blue 1px solid;
+    header {
+      width: 100%;
+      height: rem(60);
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+
+      .modal-header__title {
+        text-transform: uppercase;
+        color: $green;
+      }
+
+      .modal-place__control {
+        width: rem(20);
+        height: rem(20);
+        font-size: rem(40);
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.8;
+        }
+      }
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: rem(20) 0;
+
+      button {
+        margin-left: rem(20);
+      }
+
+      .modal-footer__choice {
+        margin-right: auto;
+      }
     }
   }
+}
 
+.no-choice {
+  color: $error;
 }
 </style>

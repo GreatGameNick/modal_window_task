@@ -6,6 +6,9 @@
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
       </nav>
+      <div v-if="!!GET_SUBMIT" class="main-header__submit">
+        your submitted result - {{GET_SUBMIT}}
+      </div>
     </header>
 
     <router-view/>
@@ -24,7 +27,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      GET_MODAL_DATA: 'GET_MODAL_DATA'
+      GET_MODAL_DATA: 'GET_MODAL_DATA',
+      GET_SUBMIT: 'GET_SUBMIT'
     })
   },
   methods: {
@@ -61,6 +65,15 @@ export default {
 
     nav {
       margin: rem(10) rem(40);
+    }
+
+    .main-header__submit {
+      height: fit-content;
+      margin: rem(10) rem(40) rem(10) auto;
+      box-sizing: border-box;
+      padding: rem(6);
+      color: $green;
+      border-bottom: $green 1px solid;
     }
   }
 

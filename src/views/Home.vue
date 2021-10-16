@@ -31,9 +31,11 @@ export default {
   methods: {
     ...mapMutations({
       SET_MODAL_COMPONENT_DATA: 'SET_MODAL_COMPONENT_DATA',
-      SET_USER_NAME: 'SET_USER_NAME'
+      SET_USER_NAME: 'SET_USER_NAME',
+      RESET_CHOICE: 'RESET_CHOICE'
     }),
     onOpenModal() {
+      this.RESET_CHOICE()
       this.SET_MODAL_COMPONENT_DATA({name: 'FolderThreeModalComponent', title: 'Demo folder set', dataId: 25})
     }
   }
